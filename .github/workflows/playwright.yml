@@ -19,9 +19,13 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+          RSA_EMAIL: ${{ secrets.RSA_EMAIL }}
+          RSA_PASSWORD: ${{ secrets.RSA_PASSWORD }}
+
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
